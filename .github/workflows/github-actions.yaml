@@ -4,9 +4,6 @@ on: [push]
 jobs:
   init:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: 16 
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -18,4 +15,3 @@ jobs:
         run: npm run build
       - name: test project
         run: npm run test
-      
