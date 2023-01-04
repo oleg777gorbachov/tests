@@ -15,33 +15,37 @@ function App() {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    let isValid = false;
     const emailStr = email.current?.value || "";
     const pass = password.current?.value || "";
-    const emailCheck = ["@", "."];
 
-    if (emailCheck.includes(emailStr) && emailStr.length > 4) isValid = true;
-    else email.current?.focus();
-
-    if (pass.length > 4 && !isValid) isValid = true;
-    else password.current?.focus();
-
-    if (isValid) {
-      const res = await fetch("https://jsonplaceholder.typicode.com/users");
-      const data: UserI[] = await res.json();
-      console.log(data);
-      if (email.current && password.current) {
-        email.current.value = "";
-        password.current.value = "";
-      }
-
-      setData(data);
+    if (
+      !emailStr.includes("@") ||
+      !emailStr.includes(".") ||
+      emailStr.length < 4
+    ) {
+      email.current?.focus();
+      return;
     }
+
+    if (pass.length < 4) {
+      password.current?.focus();
+      return;
+    }
+
+    const res = await fetch("https://jsonplaceholder.typicode.com/users");
+    const data: UserI[] = await res.json();
+    console.log(data);
+    if (email.current && password.current) {
+      email.current.value = "";
+      password.current.value = "";
+    }
+
+    setData(data);
   };
 
   if (data.length > 0) {
     return (
-      <div>
+      <div className="users">
         <h2>You logged in</h2>
         {data.map((e) => {
           return (
