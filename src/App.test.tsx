@@ -1,9 +1,32 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, screen } from "@testing-library/react";
+import App from "./App";
 
-test('renders learn react link', () => {
+test("email input should render", () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
+  const linkElement = screen.getByPlaceholderText("Email");
   expect(linkElement).toBeInTheDocument();
+});
+
+test("password input should render", () => {
+  render(<App />);
+  const linkElement = screen.getByPlaceholderText("Password");
+  expect(linkElement).toBeInTheDocument();
+});
+
+test("submit button should be render", () => {
+  render(<App />);
+  const linkElement = screen.getByDisplayValue("Submit");
+  expect(linkElement).toBeInTheDocument();
+});
+
+test("email input value should be empty", () => {
+  render(<App />);
+  const linkElement = screen.getByPlaceholderText("Email");
+  expect(linkElement).toHaveValue("");
+});
+
+test("password input value should be empty", () => {
+  render(<App />);
+  const linkElement = screen.getByPlaceholderText("Password");
+  expect(linkElement).toHaveValue("");
 });
