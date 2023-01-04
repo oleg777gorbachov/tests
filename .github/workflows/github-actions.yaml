@@ -10,9 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Installing Node.js 16 version
-          uses: actions/setup-node@v3
-          with:
-            node-version: 16 
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16 
       - name: install modulles
         run: npm install
       - name: build project
